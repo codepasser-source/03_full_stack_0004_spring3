@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+  <context:annotation-config/><!--作用：执行处理Annotation功能的程序-->
+  <bean name="userDao" class="com.baishui.dao.impl.UserDaoForOracleImpl" >
+      <property name="daoId" value="1"></property>
+  </bean> 
+    <bean name="userDao2" class="com.baishui.dao.impl.UserDaoForOracleImpl" >
+      <property name="daoId" value="1"></property>
+  </bean> 
+  <bean id="service" class="com.baishui.service.UserService"> 
+  </bean> 
+  <!-- more bean definitions go here --> 
+</beans>

@@ -1,0 +1,6 @@
+<beans>
+   <bean id="userdfo" class="com.baishui.dao.impl.UserDaoForOracleImpl"></bean>
+   <bean id="service" class="com.baishui.service.UserService">
+     <property name="userDao" bean ="userdfo"></property>
+   </bean> 
+</beans>

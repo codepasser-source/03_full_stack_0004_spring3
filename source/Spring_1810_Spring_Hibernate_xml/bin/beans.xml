@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+  <context:annotation-config/><!--作用：执行处理Annotation功能的程序-->
+  <context:component-scan base-package="com.baishui"></context:component-scan><!-- annotation 依赖注入-->
+  
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+        <value>classpath:jdbc.properties</value>
+    </property>
+  </bean> 
+   <bean id="datasource" destroy-method="close"
+      class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+   </bean> 
+    
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <property name="dataSource" ref="datasource"/> 
+       <property name="mappingResources">
+          <list>
+             <value>com/baishui/model/User.hbm.xml</value>
+          </list>
+    </property> 
+    <property name="hibernateProperties">  
+      <value>hibernate.dialect=org.hibernate.dialect.MySQLDialect</value> 
+    </property> 
+  </bean>
+   
+   
+</beans>
+

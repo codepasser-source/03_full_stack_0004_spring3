@@ -1,0 +1,32 @@
+package com.baishui.service;
+
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
+ 
+
+import com.baishui.dao.UserDao;
+ 
+import com.baishui.model.User;
+
+@Component(value="service")
+public class UserService {
+
+	private UserDao userDao; 
+
+	 
+
+	public void addUser(User u){  
+		this.userDao.saveUser(u); 
+	} 
+	
+    @Resource(name="userDao")
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	public UserDao getUserDao() {
+		return userDao;
+	} 
+}

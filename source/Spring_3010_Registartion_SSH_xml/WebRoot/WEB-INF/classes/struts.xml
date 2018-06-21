@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+     <constant name="devMode" value="true"></constant>
+     <constant name="struts.i18n.encoding" value="GBK" /> <!-- internationalization -->
+     <!-- struts2.0 begin-->
+	 <package name="user" extends="struts-default" namespace="/"> 
+		<action name="user_add" class="com.baishui.action.UserAction"> 
+			<result name="success">/regist_success.jsp</result> 
+			<result name="fail">/regist_fail.jsp</result> 
+			<result name="input">/regist_error.jsp</result> 
+		</action> 
+	 </package>
+	 <!--struts2.0 begin--> 
+</struts>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+  <context:annotation-config/><!--作用：执行处理Annotation功能的程序-->
+  <context:component-scan base-package="com.baishui"></context:component-scan><!-- annotation 依赖注入-->
+  <!--   
+   <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource"
+	destroy-method="close"> 
+       results in a setDriverClassName(String) call 
+	<property name="driverClassName">
+		<value>com.mysql.jdbc.Driver</value>
+	</property>
+	<property name="url">
+		<value>jdbc:mysql://localhost:3306/bbs</value>
+	</property>
+	<property name="username">
+		<value>root</value>
+	</property>
+	<property name="password">
+		<value>root</value>
+	</property>
+  </bean> 
+  -->
+  <!-- 第二种写法 支持占位符 读取配置文件中的配置-->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+        <value>classpath:jdbc.properties</value>
+    </property>
+  </bean> 
+   <bean id="datasource" destroy-method="close"
+      class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+   </bean> 
+    
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <property name="dataSource" ref="datasource"/>
+     <!-- hibernate xml 实体类配置
+       <property name="mappingResources">
+          <list>
+             <value>product.hbm.xml</value>
+          </list>
+      </property>
+      -->
+      
+      <!-- hibernate annotation 实体类 配置方法  -->
+      <!--
+      <property name="annotatedClasses">
+        <list>
+            <value>com.baishui.model.User</value>
+        </list>
+      </property> 
+        -->
+      <!-- hibernate annotation 实体类 自动扫描配置方法  -->
+      <property name="packagesToScan">
+        <list>
+            <value>com.baishui.model</value>
+        </list>
+      </property> 
+      <property name="hibernateProperties">
+      <!-- property 第一种 配置方法,配置hibernate.cfg.xml
+      <value>
+        hibernate.dialect=org.hibernate.dialect.HSQLDialect
+      </value>
+       -->
+     <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> 
+        <prop key="hibernate.show_sql">true</prop> 
+        <prop key="hibernate.format_sql">true</prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+      </props> 
+    </property>
+  </bean> 
+</beans>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+     <constant name="devMode" value="true"></constant> 
+      <!--将spring-struts-plubin autowire设置成根据type对Action 进行注入
+      <constant name="struts.objectFactory.spring.autoWire" value="type"/> -->
+     <!-- struts2.0 begin-->
+	 <package name="user" extends="struts-default" namespace="/"> 
+		<action name="*_*" class="com.baishui.action.UserAction" method="{2}"> 
+			<result name="success">/regist_success.jsp</result> 
+			<result name="fail">/regist_fail.jsp</result> 
+			<result name="input">/regist_error.jsp</result> 
+			<result name="list">/user_list.jsp</result>
+			<result name="load">/user_load.jsp</result>
+		</action> 
+	 </package>
+	 <!--struts2.0 begin--> 
+</struts>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<HD> 
+  <disk name="C"> 
+    <capacity>8G</capacity> 
+    <directories>200</directories> 
+    <file>1580</file> 
+  </disk> 
+
+  <disk name="D"> 
+    <capacity>10G</capacity> 
+    <directories>500</directories> 
+    <file>3000</file> 
+  </disk> 
+</HD> 
